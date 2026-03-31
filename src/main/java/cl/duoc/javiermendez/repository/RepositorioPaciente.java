@@ -21,6 +21,10 @@ public class RepositorioPaciente {
     public Optional<Paciente> obtenerPacientePorRut(int rut){
         return Optional.ofNullable(pacientesHospitalizados.get(rut));
     }
+    
+    public Optional<Paciente> obtenerPacientePorNombre(String nombre){
+        return Optional.ofNullable(pacientesHospitalizados.get(nombre));
+    }
     //agregar nuevos pacientes
     public Paciente agregarPaciente(Paciente paciente){
         pacientesHospitalizados.put(paciente.getRut(), paciente);

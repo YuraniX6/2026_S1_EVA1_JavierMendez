@@ -31,6 +31,11 @@ public class PacienteServicio {
         return repositorioPaciente.obtenerPacientePorRut(rut);
     }
 
+    public Optional<Paciente> obtenerPacientePorNombre(String nombre){
+        return repositorioPaciente.obtenerPacientePorNombre(nombre);
+    }
+
+
     //metodo para agregar un nuevo paciente
     public Paciente agregarPaciente(Paciente paciente){
         return repositorioPaciente.agregarPaciente(paciente);
