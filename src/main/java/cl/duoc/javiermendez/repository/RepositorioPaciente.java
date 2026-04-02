@@ -12,31 +12,37 @@ import cl.duoc.javiermendez.model.Paciente;
 @Repository
 public class RepositorioPaciente {
 
-    private HashMap<Integer, Paciente> pacientesHospitalizados = new HashMap<>();
+    private HashMap<Long, Paciente> pacientesHospitalizados = new HashMap<>();
     //listar todos los pacientes
     public List<Paciente> obtenerPacientes(){
         return new ArrayList<>(pacientesHospitalizados.values());
     }
+    //buscar pacientes por id
+    public Optional<Paciente> obtenerPacientePorId(Long id){
+        return Optional.ofNullable(pacientesHospitalizados.get(id));
+    }
+
     //buscar pacientes por rut
-    public Optional<Paciente> obtenerPacientePorRut(int rut){
+    public Optional<Paciente> obtenerPacientePorRut(Integer rut){
         return Optional.ofNullable(pacientesHospitalizados.get(rut));
     }
     
+    //buscar pacientes por nombre
     public Optional<Paciente> obtenerPacientePorNombre(String nombre){
         return Optional.ofNullable(pacientesHospitalizados.get(nombre));
     }
     //agregar nuevos pacientes
     public Paciente agregarPaciente(Paciente paciente){
-        pacientesHospitalizados.put(paciente.getRut(), paciente);
+        pacientesHospitalizados.put(paciente.getId(), paciente);
         return paciente;
     }
-    //eliminar pacientes por rut
-    public void eliminarPaciente(int rut){
-        pacientesHospitalizados.remove(rut);
+    //eliminar pacientes por id
+    public void eliminarPaciente(Long id){
+        pacientesHospitalizados.remove(id);
     }
-    //verificar si el paciente existe en el repositorio por rut
-    public boolean existePaciente(int rut){
-        return pacientesHospitalizados.containsKey(rut);
+    //verificar si el paciente existe en el repositorio por id
+    public boolean existePaciente(Long id){
+        return pacientesHospitalizados.containsKey(id);
     }
 
 }

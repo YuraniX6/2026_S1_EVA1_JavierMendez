@@ -12,8 +12,11 @@ public class Paciente {
 
     //Parametros del paciente
 
+    @NotNull(message = "El id no puede ser nulo")
+    private Long id;
+
     @NotNull(message = "El rut no puede ser nulo")
-    private int rut;
+    private Integer rut;
 
     @NotBlank(message = "El rut final no puede estar vacio")
     private String rutFinal;
@@ -31,7 +34,7 @@ public class Paciente {
     private String direccion;
 
     @NotNull(message = "El telefono no puede ser nulo")
-    private int telefono;
+    private Integer telefono;
 
     @NotBlank(message = "El tipo de atencion no puede estar vacio")
     private String tipoAtencion;

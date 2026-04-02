@@ -31,6 +31,12 @@ public class PacienteServicio {
         return repositorioPaciente.obtenerPacientePorRut(rut);
     }
 
+    //metodo para obtener un paciente por id
+    public Optional<Paciente> obtenerPacientePorId(Long id){
+        return repositorioPaciente.obtenerPacientePorId(id);
+    }
+
+    //metodo para obtener un paciente por nombre
     public Optional<Paciente> obtenerPacientePorNombre(String nombre){
         return repositorioPaciente.obtenerPacientePorNombre(nombre);
     }
@@ -42,12 +48,32 @@ public class PacienteServicio {
     }
 
     //metodo para eliminar un paciente por rut
-    public boolean eliminarPaciente(int rut){
-        if(repositorioPaciente.existePaciente(rut)){
-            repositorioPaciente.eliminarPaciente(rut);
+    public boolean eliminarPaciente(Long id){
+        if(repositorioPaciente.existePaciente(id)){
+            repositorioPaciente.eliminarPaciente(id);
             return true;
         }
         return false;
     }
 
+    //metodo para actualizar un paciente por id
+    public Paciente actualizarPaciente(Long id, Paciente paciente) {
+        Optional<Paciente> pacienteExistente = repositorioPaciente.obtenerPacientePorId(id);
+        if (pacienteExistente.isPresent()) {
+            Paciente pacienteActualizado = pacienteExistente.get();
+            pacienteActualizado.setId(id);
+            pacienteActualizado.setRut(paciente.getRut());
+            pacienteActualizado.setRutFinal(paciente.getRutFinal());
+            pacienteActualizado.setNombre(paciente.getNombre());
+            pacienteActualizado.setApellido(paciente.getApellido());
+            pacienteActualizado.setFechaDeIngreso(paciente.getFechaDeIngreso());
+            pacienteActualizado.setDireccion(paciente.getDireccion());
+            pacienteActualizado.setTelefono(paciente.getTelefono());
+            pacienteActualizado.setTipoAtencion(paciente.getTipoAtencion());
+            pacienteActualizado.setNivelPrioridad(paciente.getNivelPrioridad());
+            return repositorioPaciente.agregarPaciente(pacienteActualizado);
+        } else {
+            return null;
+        }
+    }
 }
